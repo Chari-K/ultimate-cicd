@@ -1,13 +1,17 @@
-# You can change this base image to anything else
-# But make sure to use the correct version of Java
-FROM adoptopenjdk/openjdk11:alpine-jre
+# Use a maintained and secure Java 17 Alpine base
+FROM eclipse-temurin:17-jre-alpine
 
-# Simply the artifact path
+# Optional: non-root user for better security
+RUN addgroup -S app && adduser -S app -G app
+USER app
+
+# Path to the compiled JAR from Maven
 ARG artifact=target/spring-boot-web.jar
 
 WORKDIR /opt/app
 
+# Copy the JAR file into the container
 COPY ${artifact} app.jar
 
-# This should not be changed
+# Start the Spring Boot app
 ENTRYPOINT ["java","-jar","app.jar"]
