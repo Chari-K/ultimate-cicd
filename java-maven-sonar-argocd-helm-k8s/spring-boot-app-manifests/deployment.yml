@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: charidhub/jenkins-agent:9
+        image: charidhub/jenkins-agent:10
         ports:
         - containerPort: 8080
